@@ -17,62 +17,28 @@
 
     <ul>
         <li><a id="toc-Introduction" href="#Introduction">Introduction</a></li>
-        <li><a id="toc-Zig-Standard-Library" href="#Zig-Standard-Library">Zig Standard Library</a></li>
-        <li><a id="toc-Hello-World" href="#Hello-World">Hello World</a></li>
-        <li><a id="toc-Comments" href="#Comments">Comments</a>
-        <ul>
-            <li><a id="toc-Doc-Comments" href="#Doc-Comments">Doc Comments</a></li>
-            <li><a id="toc-Top-Level-Doc-Comments" href="#Top-Level-Doc-Comments">Top-Level Doc Comments</a></li>
-        </ul></li>
-        <li><a id="toc-Values" href="#Values">Values</a>
-        <ul>
-            <li><a id="toc-Primitive-Types" href="#Primitive-Types">Primitive Types</a></li>
-            <li><a id="toc-Primitive-Values" href="#Primitive-Values">Primitive Values</a></li>
-            <li><a id="toc-String-Literals-and-Unicode-Code-Point-Literals" href="#String-Literals-and-Unicode-Code-Point-Literals">String Literals and Unicode Code Point Literals</a>
+        <li><a id="toc-Products" href="#Products">Products</a>
             <ul>
-                <li><a id="toc-Escape-Sequences" href="#Escape-Sequences">Escape Sequences</a></li>
-                <li><a id="toc-Multiline-String-Literals" href="#Multiline-String-Literals">Multiline String Literals</a></li>
-            </ul></li>
-            <li><a id="toc-Assignment" href="#Assignment">Assignment</a>
-            <ul>
-                <li><a id="toc-undefined" href="#undefined">undefined</a></li>
-            </ul></li>
-        </ul></li>
-        <li><a id="toc-Zig-Test" href="#Zig-Test">Zig Test</a>
-        <ul>
-            <li><a id="toc-Test-Declarations" href="#Test-Declarations">Test Declarations</a></li>
-            <li><a id="toc-Nested-Container-Tests" href="#Nested-Container-Tests">Nested Container Tests</a></li>
-            <li><a id="toc-Test-Failure" href="#Test-Failure">Test Failure</a></li>
-            <li><a id="toc-Skip-Tests" href="#Skip-Tests">Skip Tests</a></li>
-            <li><a id="toc-Report-Memory-Leaks" href="#Report-Memory-Leaks">Report Memory Leaks</a></li>
-            <li><a id="toc-Detecting-Test-Build" href="#Detecting-Test-Build">Detecting Test Build</a></li>
-            <li><a id="toc-Test-Output-and-Logging" href="#Test-Output-and-Logging">Test Output and Logging</a></li>
-            <li><a id="toc-The-Testing-Namespace" href="#The-Testing-Namespace">The Testing Namespace</a></li>
-            <li><a id="toc-Test-Tool-Documentation" href="#Test-Tool-Documentation">Test Tool Documentation</a></li>
-        </ul></li>
-        <li><a id="toc-Variables" href="#Variables">Variables</a>
-        <ul>
-            <li><a id="toc-Identifiers" href="#Identifiers">Identifiers</a></li>
-            <li><a id="toc-Container-Level-Variables" href="#Container-Level-Variables">Container Level Variables</a></li>
-            <li><a id="toc-Static-Local-Variables" href="#Static-Local-Variables">Static Local Variables</a></li>
-            <li><a id="toc-Thread-Local-Variables" href="#Thread-Local-Variables">Thread Local Variables</a></li>
-            <li><a id="toc-Local-Variables" href="#Local-Variables">Local Variables</a></li>
-        </ul></li>
-        <li><a id="toc-Integers" href="#Integers">Integers</a>
-        <ul>
-            <li><a id="toc-Integer-Literals" href="#Integer-Literals">Integer Literals</a></li>
-            <li><a id="toc-Runtime-Integer-Values" href="#Runtime-Integer-Values">Runtime Integer Values</a></li>
-        </ul></li>
-        <li><a id="toc-Floats" href="#Floats">Floats</a>
-        <ul>
-            <li><a id="toc-Float-Literals" href="#Float-Literals">Float Literals</a></li>
-            <li><a id="toc-Floating-Point-Operations" href="#Floating-Point-Operations">Floating Point Operations</a></li>
-        </ul></li>
-        <li><a id="toc-Operators" href="#Operators">Operators</a>
-        <ul>
+                <li><a id="toc-xMost" href="#xMost">xMost</a></li>
+                <li><a id="toc-xStock" href="#xStock">xStock</a></li>
+            </ul>
+        </li>
+        <li><a id="toc-Hello-World" href="#Database">Database</a></li>
+        <li><a id="toc-Comments" href="#Comments">System service</a></li>
+        <li><a id="toc-Values" href="#Values">Socket service</a></li>
+        <li><a id="toc-Zig-Test" href="#Zig-Test">State Service</a></li>
+        <li><a id="toc-Variables" href="#Variables">System Webservice</a>
+        </li>
+        <li><a id="toc-Integers" href="#Integers">Alarm Service</a></li>
+        <li><a id="toc-Floats" href="#Floats">API Service</a></li>
+        <li><a id="toc-Operators" href="#Operators">xStock Webservice</a></li>
+        <li><a id="toc-Table-of-Operators" href="#Table-of-Operators">xStock Terminal Webservice</a></li>
+
+        <!--<ul>
             <li><a id="toc-Table-of-Operators" href="#Table-of-Operators">Table of Operators</a></li>
             <li><a id="toc-Precedence" href="#Precedence">Precedence</a></li>
-        </ul></li>
+        </ul>
+        -->
         </ul>
 
 
@@ -82,8 +48,7 @@
       <h2 id="Introduction"><a href="#toc-Introduction">Introduction</a> <a class="hdr" href="#Introduction">§</a></h2>
 
       <p>
-      <a href="https://ziglang.org">Zig</a> is a general-purpose programming language and toolchain for maintaining
-      <strong>robust</strong>, <strong>optimal</strong>, and <strong>reusable</strong> software.
+          <a href="https://github.com/jahoda-tech" target="_blank">Jahoda tech</a> - we are company that specializes in creating pieces of software for monitoring the production of <strong>machinery</strong> with its users and in keeping track of your <strong>stock</strong> by saving all the information in a database that allows you to see everything on a website.
       </p>
       <dl>
         <dt>Robust</dt><dd>Behavior is correct even for edge cases such as out of memory.</dd>
@@ -107,7 +72,7 @@
       </p>
       
 
-      <h2 id="Zig-Standard-Library"><a href="#toc-Zig-Standard-Library">Zig Standard Library</a> <a class="hdr" href="#Zig-Standard-Library">§</a></h2>
+      <h2 id="Products"><a href="#toc-Products">Products</a> <a class="hdr" href="#Products">§</a></h2>
 
       <p>
         The <a href="https://ziglang.org/documentation/master/std/">Zig Standard Library</a> has its own documentation.
@@ -117,9 +82,11 @@
         You will see many examples of Zig's Standard Library used in this documentation. To learn more about the Zig Standard Library,
         visit the link above.
       </p>
+          <h3 id="xMost"><a href="#toc-xMost">xMost</a> <a class="hdr" href="#Primitive-Types">§</a></h3>
+          <h3 id="xStock"><a href="#toc-xStock">xStock</a> <a class="hdr" href="#Primitive-Types">§</a></h3>
       
 
-      <h2 id="Hello-World"><a href="#toc-Hello-World">Hello World</a> <a class="hdr" href="#Hello-World">§</a></h2>
+      <h2 id="Database"><a href="#toc-Database">Database</a> <a class="hdr" href="#Database">§</a></h2>
 
 
       <figure><figcaption class="zig-cap"><cite class="file">hello.zig</cite></figcaption><pre><code><span class="line"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span>
