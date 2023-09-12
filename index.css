@@ -48,7 +48,7 @@ header {
 }
 
 a:hover,a:focus {
-    background: #fff2a8;
+    background: #a8b9cc;
 }
 dt {
     font-weight: bold;
@@ -325,4 +325,22 @@ th .line:before {
     #table-of-contents::before {
         content: "";
     }
+}
+
+.highlight {
+    position: relative;
+}
+
+.highlight::after {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    border-radius: 5px;
+    background: #a8b9cc;
 }
