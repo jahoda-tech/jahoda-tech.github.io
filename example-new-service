@@ -1,0 +1,48 @@
+
+
+For a product: <li><a id="toc-xMost" href="#xMost">xMost</a>
+                               <ul>
+                                   <li><a id="toc-xMost-Installation" href="#xMost-Installation">Installation</a></li>
+                                   <li><a id="toc-xMost-First-setup" href="#xMost-First-setup">First setup</a></li>
+                                   <li><a id="toc-xMost-Settings" href="#xMost-Settings">Settings</a>
+                                   <ul>
+                                       <li><a id="toc-xMost-Particular-settings" href="#xMost-Particular-settings">Particular settings</a> </li>
+                                   </ul>
+                                   </li>
+
+                               </ul>
+                               </li>
+
+For a service: <li><a id="toc-xStock-terminal-webservice" href="#xStock-terminal-webservice">xStock Terminal Webservice</a></li>
+
+
+To connect a service: <h3 id="xStock-terminal-webservice"><a href="#toc-xStock-terminal-webservice">xStock Terminal webservice</a> <a class="hdr" href="#xStock-terminal-webservice">§</a></h3>
+
+                                <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+                                         <p> Install under docker runtime using this dockerfile image with this command: </p>
+                                         <hr>
+                                         <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
+                               </samp></pre></figure>
+                                         <hr>
+
+                                         <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+                                         Check the software running with this command: <hr>
+                                         <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+                               </samp></pre></figure>
+                                         <hr>
+                                         socket_service has to be running.
+
+
+To connect a product: <h3 id="xMost"><a href="#toc-xMost">xMost</a> <a class="hdr" href="#xMost">§</a></h3>
+
+                                <h4 id="xMost-Installation"><a href="#toc-xMost-Installation">Installation</a> <a class="hdr" href="xMost-Installation">§</a></h4>
+
+                                <h4 id="xMost-First-setup"><a href="#toc-xMost-First-setup">First setup</a> <a class="hdr" href="xMost-First-setup">§</a></h4>
+
+                                <h4 id="xMost-Settings"><a href="#toc-xMost-Settings">Settings</a> <a class="hdr" href="xMost-Settings">§</a></h4>
+
+                                    <h5 id="xMost-Particular-settings"><a href="#toc-xMost-Particular-settings">Particular Settings</a> <a class="hdr" href="xMost-Particular-settings">§</a> </h5>

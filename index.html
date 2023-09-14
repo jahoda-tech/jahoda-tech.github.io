@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +52,12 @@
             <li><a id="toc-Socket-service" href="#Socket-service">Socket service</a></li>
             <li><a id="toc-State-service" href="#State-service">State Service</a></li>
             <li><a id="toc-System-webservice" href="#System-webservice">System Webservice</a>
+                <ul>
+                    <li>
+                        <a id="toc-Actual-images-for-system-webservice" href="#Actual-images-for-system-webservice">Images</a>
+                    </li>
+
+                </ul>
             </li>
             <li><a id="toc-Alarm-service" href="#Alarm-service">Alarm Service</a></li>
             <li><a id="toc-API-service" href="#API-service">API Service</a></li>
@@ -135,113 +141,161 @@
 
           <h3 id="Database"><a href="#toc-Database">Database</a> <a class="hdr" href="#Database">§</a></h3>
 
+          <p style="font-size: 18px"><strong>Description</strong></p>
 
+          <p>Go module that holds database structure, used in every system service. PostgreSQL 14 is used as a database service.</p>
+
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
+</samp></pre></figure>
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+          <p>Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+</samp></pre></figure>
+          <hr>
+          Database has to be running.
+
+          <p style="font-size: 18px"><strong>After installation fine tuning</strong></p>
+
+          <ul>
+              <li>use <a target="_blank" href="https://pgtune.leopard.in.ua/#/">https://pgtune.leopard.in.ua/#/</a>
+                  <ul>
+                      <li>default: DB version 14</li>
+                      <li>default: OS Type Linux</li>
+                      <li>default: DB Type Mixed type of applications</li>
+                      <li>default: number of connections: 50 default + 10 per 1 workplace (for example: 150 per 10 workplaces)</li>
+                  </ul>
+              </li>
+              <li>update configuration using ALTER SYSTEM tab</li>
+              <li>restart database container</li>
+          </ul>
 
       
       <h3 id="System-service"><a href="#toc-System-service">System Service</a> <a class="hdr" href="#System-service">§</a></h3>
 
-      <p>
-      Zig supports 3 types of comments. Normal comments are ignored, but doc comments
-      and top-level doc comments are used by the compiler to generate the package documentation.
-      </p>
-      <p>
-      The generated documentation is still experimental, and can be produced with:
-      </p>
-      <figure><figcaption class="shell-cap">Shell</figcaption><pre><samp>zig test -femit-docs main.zig
-</samp></pre></figure>
-      <figure><figcaption class="zig-cap"><cite class="file">comments.zig</cite></figcaption><pre><code><span class="line"><span class="tok-kw">const</span> print = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>).debug.print;</span>
-<span class="line"></span>
-<span class="line"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">main</span>() <span class="tok-type">void</span> {</span>
-<span class="line">    <span class="tok-comment">// Comments in Zig start with &quot;//&quot; and end at the next LF byte (end of line).</span></span>
-<span class="line">    <span class="tok-comment">// The line below is a comment and won't be executed.</span></span>
-<span class="line"></span>
-<span class="line">    <span class="tok-comment">//print(&quot;Hello?&quot;, .{});</span></span>
-<span class="line"></span>
-<span class="line">    print(<span class="tok-str">&quot;Hello, world!\n&quot;</span>, .{}); <span class="tok-comment">// another comment</span></span>
-<span class="line">}</span></code></pre></figure><figure><figcaption class="shell-cap">Shell</figcaption><pre><samp>$ <kbd>zig build-exe comments.zig</kbd>
-$ <kbd>./comments</kbd>
-Hello, world!
-</samp></pre></figure>
-      <p>
-      There are no multiline comments in Zig (e.g. like <code class="c">/* */</code>
-      comments in C).  This allows Zig to have the property that each line
-      of code can be tokenized out of context.
-      </p>
+          <p style="font-size: 18px"><strong>Description</strong></p>
 
+          <p>Go service automatically creates database on its first run, check database size and disc free space. Sends email, when disc space is low.</p>
 
-      <p>
-      A doc comment is one that begins with exactly three slashes (i.e.
-      <code><span class="line"><span class="tok-comment">///</span></span></code> but not <code><span class="line"><span class="tok-comment">////</span></span></code>);
-      multiple doc comments in a row are merged together to form a multiline
-      doc comment.  The doc comment documents whatever immediately follows it.
-      </p>
-      <figure><figcaption class="zig-cap"><cite class="file">doc_comments.zig</cite></figcaption><pre><code><span class="line"><span class="tok-comment">/// A structure for storing a timestamp, with nanosecond precision (this is a</span></span>
-<span class="line"><span class="tok-comment">/// multiline doc comment).</span></span>
-<span class="line"><span class="tok-kw">const</span> Timestamp = <span class="tok-kw">struct</span> {</span>
-<span class="line">    <span class="tok-comment">/// The number of seconds since the epoch (this is also a doc comment).</span></span>
-<span class="line">    seconds: <span class="tok-type">i64</span>,  <span class="tok-comment">// signed so we can represent pre-1970 (not a doc comment)</span></span>
-<span class="line">    <span class="tok-comment">/// The number of nanoseconds past the second (doc comment again).</span></span>
-<span class="line">    nanos: <span class="tok-type">u32</span>,</span>
-<span class="line"></span>
-<span class="line">    <span class="tok-comment">/// Returns a `Timestamp` struct representing the Unix epoch; that is, the</span></span>
-<span class="line">    <span class="tok-comment">/// moment of 1970 Jan 1 00:00:00 UTC (this is a doc comment too).</span></span>
-<span class="line">    <span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">unixEpoch</span>() Timestamp {</span>
-<span class="line">        <span class="tok-kw">return</span> Timestamp{</span>
-<span class="line">            .seconds = <span class="tok-number">0</span>,</span>
-<span class="line">            .nanos = <span class="tok-number">0</span>,</span>
-<span class="line">        };</span>
-<span class="line">    }</span>
-<span class="line">};</span></code></pre></figure>
-      <p>
-      Doc comments are only allowed in certain places; it is a compile error to
-      have a doc comment in an unexpected place, such as in the middle of an expression,
-      or just before a non-doc comment.
-      </p>
-      <figure><figcaption class="zig-cap"><cite class="file">invalid_doc-comment.zig</cite></figcaption><pre><code><span class="line"><span class="tok-comment">/// doc-comment</span></span>
-<span class="line"><span class="tok-comment">//! top-level doc-comment</span></span>
-<span class="line"><span class="tok-kw">const</span> std = <span class="tok-builtin">@import</span>(<span class="tok-str">&quot;std&quot;</span>);</span></code></pre></figure><figure><figcaption class="shell-cap">Shell</figcaption><pre><samp>$ <kbd>zig build-obj invalid_doc-comment.zig</kbd>
-<span class="sgr-1m">docgen_tmp/invalid_doc-comment.zig:1:16: </span><span class="sgr-31m">error: </span><span class="sgr-1m">expected type expression, found 'a document comment'
-</span>/// doc-comment
-               <span class="sgr-32m">^
-</span>
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
 </samp></pre></figure>
-      <figure><figcaption class="zig-cap"><cite class="file">unattached_doc-comment.zig</cite></figcaption><pre><code><span class="line"><span class="tok-kw">pub</span> <span class="tok-kw">fn</span> <span class="tok-fn">main</span>() <span class="tok-type">void</span> {}</span>
-<span class="line"></span>
-<span class="line"><span class="tok-comment">/// End of file</span></span></code></pre></figure><figure><figcaption class="shell-cap">Shell</figcaption><pre><samp>$ <kbd>zig build-obj unattached_doc-comment.zig</kbd>
-<span class="sgr-1m">docgen_tmp/unattached_doc-comment.zig:3:1: </span><span class="sgr-31m">error: </span><span class="sgr-1m">unattached documentation comment
-</span>/// End of file
-<span class="sgr-32m">^~~~~~~~~~~~~~~
-</span>
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+          Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
 </samp></pre></figure>
-      <p>
-      Doc comments can be interleaved with normal comments. Currently, when producing
-      the package documentation, normal comments are merged with doc comments.
-      </p>
-
-
-      <p>
-      A top-level doc comment is one that begins with two slashes and an exclamation
-      point: <code><span class="line"><span class="tok-comment">//!</span></span></code>; it documents the current module.
-      </p>
-      <p>
-      It is a compile error if a top-level doc comment is not placed at the start
-      of a <a href="#Containers">container</a>, before any expressions.
-      </p>
-      <figure><figcaption class="zig-cap"><cite class="file">tldoc_comments.zig</cite></figcaption><pre><code><span class="line"><span class="tok-comment">//! This module provides functions for retrieving the current date and</span></span>
-<span class="line"><span class="tok-comment">//! time with varying degrees of precision and accuracy. It does not</span></span>
-<span class="line"><span class="tok-comment">//! depend on libc, but will use functions from it if available.</span></span>
-<span class="line"></span>
-<span class="line"><span class="tok-kw">const</span> S = <span class="tok-kw">struct</span> {</span>
-<span class="line">    <span class="tok-comment">//! Top level comments are allowed inside a container other than a module,</span></span>
-<span class="line">    <span class="tok-comment">//! but it is not very useful.  Currently, when producing the package</span></span>
-<span class="line">    <span class="tok-comment">//! documentation, these comments are ignored.</span></span>
-<span class="line">};</span></code></pre></figure>
+          <hr>
+          system_service has to be running. No need to make a specific setup.
       
       
       <h3 id="Socket-service"><a href="#toc-Socket-service">Socket service</a> <a class="hdr" href="#Socket-service">§</a></h3>
 
-      lorem lipsum
-      
+          <p style="font-size: 18px"><strong>Description</strong></p>
+          <p> Go service downloads data from devices using socket communication.</p>
+
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
+</samp></pre></figure>
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+          Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+</samp></pre></figure>
+          <hr>
+          socket_service has to be running.
+
+          <p style="font-size: 18px"><strong>Setup device for download</strong></p>
+
+          <ul>
+              <li>1. Add device to database: insert new data into <span class="highlight">devices</span> table
+                  <ul>
+                      <li>insert device name into <span class="highlight">name</span> column</li>
+                      <li>insert proper device_type_id into <span class="highlight">device_type_id</span> column</li>
+                      <li>set <span class="highlight">activated</span> column to true</li>
+                      <li>insert proper ip address to <span class="highlight">ip_address</span> column</li>
+                      <li>insert proper communication port to <span class="highlight">settings</span> column</li>
+                  </ul>
+              </li>
+              <li>2. Setup data for download: check data on device in /log directory
+                  <ul>
+                      <li>for analog data: insert new data into <span class="highlight">device_ports</span> table
+                          <ul>
+                              <li>insert port name into <span class="highlight">name</span> column</li>
+                              <li>insert proper device_id into <span class="highlight">device_id</span> column</li>
+                              <li>insert 2 into <span class="highlight">device_port_type_id</span> column</li>
+                              <li>insert position from analog.txt into <span class="highlight">port number</span> column</li>
+                              <li>insert unit into <span class="highlight">unit</span> column</li>
+                              <li>set <span class="highlight">virtual</span> column to false</li>
+                          </ul>
+                      </li>
+                      <li>for digital data: insert new data into <span class="highlight">device_ports</span> table
+                          <ul>
+                              <li>insert port name into <span class="highlight">name</span> column</li>
+                              <li>insert proper device_id into <span class="highlight">device_id</span> column</li>
+                              <li>insert 1 into <span class="highlight">device_port_type_id</span> column</li>
+                              <li>insert position from digital.txt into <span class="highlight">port_number</span> column</li>
+                              <li>insert unit into <span class="highlight">unit</span> column</li>
+                              <li>set <span class="highlight">virtual</span> column to false</li>
+                          </ul>
+                      </li>
+                      <li>for serial data: insert new data into <span class="highlight">device_ports</span> table
+                          <ul>
+                              <li>insert port name into <span class="highlight">name</span> column</li>
+                              <li>insert proper device_id into <span class="highlight">device_id</span> column</li>
+                              <li>insert 3 into <span class="highlight">device_port_type_id</span> column</li>
+                              <li>insert position from serial.txt into <span class="highlight">port_number</span> column</li>
+                              <li>insert unit into <span class="highlight">unit</span> column</li>
+                              <li>set <span class="highlight">virtual</span> column to false</li>
+                          </ul>
+                      </li>
+                  </ul>
+              </li>
+              <li>3. Setup virtual ports (additional) Virtual ports are calculated from physical data on-the-fly. That means data are inserted into database in exactly the same time as original data from device. To add virtual port
+                  <ul>
+                      <li>insert all data into <span class="highlight">device_ports</span> table as above</li>
+                      <li>set <span class="highlight">port_number</span> to specific value not found in physical files (use 101, etc.)</li>
+                      <li>set <span class="highlight">virtual</span> to true</li>
+                      <li>set <span class="highlight">settings</span> to desired outcome</li>
+                  </ul>
+              </li>
+          </ul>
+
+          <p style="font-size: 18px"><strong>Settings examples</strong></p>
+
+          <ul>
+              <li>virtual analog port example: <span class="highlight">$20$ * 23</span>: result is whatever data is in port id 2- times 23</li>
+              <li>virtual analog port example: <span class="highlight">$20$ + $21$/2</span></li>
+              <li>virtual digital port example: <span class="highlight">($2$ > 1) && ($1$==1)</span>: result is 1 if data in port id 2 > 1 and data in port id 1 is 1</li>
+              <li>virtual digital port example: <span class="highlight">($1$==1) && ($2$==1) && ($3$==0)</span></li>
+              <li>virtual digital port example: <span class="highlight">($1$==1) || ($2$==1) || ($3$>==1)</span></li>
+              <li>virtual digital port with <span class="highlight">CHECKPORT;$23$:$12$;$32$</span> will check for portid 23 if in its 1 to 0 duration there are signals for port 12 and 23, if there are this virtual port will be saved with duration like port id 23</li>
+              <li>physical analog port data replacement on the fly: just paste <span class="highlight">/200</span> to save values divided by 200, etc.</li>
+              <li>physical digital port with <span class="highlight">ADDZERO</span> settings will save 1 and 0 immediately when 1 came, ignores original 0 data</li>
+          </ul>
+          <span class="highlight"></span>
       
       
       <h3 id="State-service"><a href="#toc-State-service">State service</a> <a class="hdr" href="#State-service">§</a></h3>
@@ -255,7 +309,7 @@ Hello, world!
 
           <p style="font-size: 18px"><strong>Installation Information</strong></p>
 
-          Install under docker runtime using this dockerfile image with this command:
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
           <hr>
           <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
 
@@ -327,63 +381,311 @@ Hello, world!
               </li>
           </ul>
 
-          <h3 id="System-webservice"><a href="#toc-System-service">System service</a> <a class="hdr" href="#System-webservice">§</a></h3>
+          <h3 id="System-webservice"><a href="#toc-System-webservice">System webservice</a> <a class="hdr" href="#System-webservice">§</a></h3>
 
 
-          <p><strong>Description</strong></p>
+          <p style="font-size: 18px"><strong>Description</strong></p>
 
-          <p><strong>Installation Information</strong></p>
+            <p>Go web service for user UI</p>
+
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
+</samp></pre></figure>
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
 
 
-          <p><strong>Implementation Information</strong></p>
+          <p>Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
 
+</samp></pre></figure>
+          <hr>
+              System_service has to be running. No need to make a specific setup.</p>
+
+          <h4 id="Actual-images-for-system-webservice"><a href="#toc-Actual-images-for-system-webservice">Actual images of this webservice</a><a class="hdr" href="Actual-images-for-system-webservice">§</a></h4>
+            <div style="
+            object-fit: cover;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+">
+                <img style="width: 50%; height: 40%" src="images/system_service.png">
+                <img style="width: 50%; height: 40%" src="images/system_service2.png">
+                <img style="width: 50%; height: 40%" src="images/system_service3.png">
+                <img style="width: 50%; height: 40%" src="images/system_service4.png">
+                <img style="width: 50%; height: 40%" src="images/system_service5.png">
+                <img style="width: 50%; height: 40%" src="images/system_service6.png">
+                <img style="width: 50%; height: 40%" src="images/system_service7.png">
+                <img style="width: 50%; height: 40%" src="images/system_service8.png">
+                <img style="width: 50%; height: 40%" src="images/system_service9.png">
+                <img style="width: 50%; height: 40%" src="images/system_service10.png">
+                <img style="width: 50%; height: 40%" src="images/system_service11.png">
+                <img style="width: 50%; height: 40%" src="images/system_service12.png">
+                <img style="width: 50%; height: 40%" src="images/system_service13.png">
+                <img style="width: 50%; height: 40%" src="images/system_service14.png">
+                <img style="width: 50%; height: 40%" src="images/system_service15.png">
+                <img style="width: 50%; height: 40%" src="images/system_service16.png">
+                <img style="width: 50%; height: 40%" src="images/system_service17.png">
+                <img style="width: 50%; height: 40%" src="images/system_service18.png">
+                <img style="width: 50%; height: 40%" src="images/system_service19.png">
+                <img style="width: 50%; height: 40%" src="images/system_service20.png">
+                <img style="width: 50%; height: 40%" src="images/system_service21.png">
+                <img style="width: 50%; height: 40%" src="images/system_service22.png">
+                <img style="width: 50%; height: 40%" src="images/system_service23.png">
+                <img style="width: 50%; height: 40%" src="images/system_service24.png">
+                <img style="width: 50%; height: 40%" src="images/system_service25.png">
+                <img style="width: 50%; height: 40%" src="images/system_service26.png">
+                <img style="width: 50%; height: 40%" src="images/system_service27.png">
+                <img style="width: 50%; height: 40%" src="images/system_service28.png">
+                <img style="width: 50%; height: 40%" src="images/system_service29.png">
+                <img style="width: 50%; height: 40%" src="images/system_service30.png">
+            </div>
+
+          
+          
+          
       <h3 id="Alarm-service"><a href="#toc-Alarm-service">Alarm service</a> <a class="hdr" href="#Alarm-service">§</a></h3>
 
-          <p><strong>Description</strong></p>
+          <p style="font-size: 18px"><strong>Description</strong></p>
 
-          <p><strong>Installation Information</strong></p>
+          <p>Go service, that check for alarms and do proper action when alarms are active.</p>
 
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
 
-          <p><strong>Implementation Information</strong></p>
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
 
-      
-      
-      <h3 id="API-service"><a href="#toc-API-service">API service</a> <a class="hdr" href="#API-service">§</a></h3>
-
-          <p><strong>Description</strong></p>
-
-          <p><strong>Installation Information</strong></p>
-
-
-          <p><strong>Implementation Information</strong></p>
-
-
-          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$ <kbd>zig build-exe hello.zig</kbd>
-$ <kbd>./hello</kbd>
-Hello, world!
 </samp></pre></figure>
-      
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+
+          <p>Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+</samp></pre></figure>
+          <hr>
+          Terminal_service has to be running.
+
+
+          <p style="font-size: 18px"><strong>Additional Information</strong></p>
+
+          <ul>
+
+              <li>working with alarms in <span class="highlight">alarms</span> table</li>
+              <li>creates and updates alarm records in <span class="highlight">alarm_records</span> table</li>
+              <li>in alarms_table recipients has to be delimited by "," or ";"</li>
+              <li>result of sql query has to be in one column named result with 4 possible outcomes
+                  <ul>
+                      <li>true => alarm result is ON</li>
+                      <li>false => alarm result is OFF</li>
+                      <li>something (string, number, ...) => alarm result is ON</li>
+                      <li>nothing (epmty) => alarm result is OFF</li>
+                  </ul>
+              </li>
+          </ul>
+
+          <p style="font-size: 18px"><strong>Example of sql queries</strong></p>
+
+          <ul>
+              <li>Creates alarm_record at the beginning of 12:00 on Saturday
+                  <ul>
+                      <li>only on this day and hour, alarm is ON, alarm_record is created at the beginning "true period"</li>
+                      <li>on another hour and day, alarm is OFF, alarm_record is closed at the beginning of "false period"</li>
+                  </ul>
+              </li>
+              <hr>
+              <pre><samp>select to_char(now(), 'Day') like '%Saturday%' and extract(hour from now()) = 12 as result
+
+</samp></pre></figure>
+              <hr>
+              <li>
+                  Creates alarm when more than 5 workplaces are offline
+              </li>
+              <hr>
+              <pre><samp>select (select count(id) from state_records where id in (select distinct max(id) as id from state_records group by workplace_id) and state_id=3)>5 as result
+
+</samp></pre></figure>
+          </ul>
+          
+          <p>Alarms example: </p>
+          <img style="width: 100%; height:100%;" src="images/alarms.png">
+
+          <p>Alarm records example: </p>
+
+          <img style="width: 100%; height:100%;" src="images/alarm_records.png">
+
+
+
+
+          <h3 id="API-service"><a href="#toc-API-service">API service</a> <a class="hdr" href="#API-service">§</a></h3>
+
+          <p style="font-size: 18px"><strong>Description</strong></p>
+
+          <p>API for xmost and xstock
+          <br>
+              A data transportation system that allows the communication between databases and their data</p>
+
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
+
+</samp></pre></figure>
+          <hr>
+
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
+
+          <p>Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+</samp></pre></figure>
+          <hr>
+          api_service has to be running.
+
+
+          <p style="font-size: 16px"><strong>API description</strong></p>
+
+          <p>Load Data:</p>
+
+          <p>Stock states: <br>
+              Example JSON: http://localhost:93/stock_states?date_from=2023-04-02T10:40:00&date_to=2023-08-04T14:40:00&format=json
+          <br>
+          Example JSON result:
+
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>  "Result": "OK, data limited to 1000 latest records in selected datetime",
+  "Data": [
+    {
+      "ID": 21592,
+      "CreatedAt": "2023-06-12T11:48:14.958297+02:00",
+      "UpdatedAt": "2023-06-12T11:48:14.958297+02:00",
+      "StockID": 1,
+      "StockName": "Hlavni sklad",
+      "ProductID": 4320,
+      "ProductName": "Paleta přepravní 700x JD AZ204425 3160x2185mm - nové č.2 (varianta 3 - standardní profily, dle uchycení stroje na paletu))[800001020514079]",
+      "SerialNumberID": {
+        "Int32": 0,
+        "Valid": false
+      },
+      "BatchNumberID": {
+        "Int32": 0,
+        "Valid": false
+      },
+      "StockLocationID": {
+        "Int32": 0,
+        "Valid": false
+      },
+      "Count": {
+        "Int32": 3,
+        "Valid": true
+      },
+      "Volume": {
+        "Float64": 0,
+        "Valid": false
+      },
+      "Note": ""
+    }
+  ]
+}
+
+</samp></pre></figure>
+          </p>
+
+          <p>Example XML: http://localhost:93/stock_states?date_from=2023-06-11T10:40:00&date_to=2023-06-13T14:40:00&format=xml
+              <br>
+              Example XML result:
+
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>  <pre lang="xml" >{{xmlString}}</pre>      <Result>OK, data limited to 1000 latest records in selected datetime</Result>
+    <Data>
+        <ID>21592</ID>
+        <CreatedAt>2023-06-12T11:48:14.958297+02:00</CreatedAt>
+        <UpdatedAt>2023-06-12T11:48:14.958297+02:00</UpdatedAt>
+        <StockID>1</StockID>
+        <StockName>Hlavni sklad</StockName>
+        <ProductID>4320</ProductID>
+        <ProductName>Paleta přepravní 700x JD AZ204425 3160x2185mm - nové č.2 (varianta 3 - standardní profily, dle
+            uchycení stroje na paletu))[800001020514079]
+        </ProductName>
+        <SerialNumberID>
+            <Int32>0</Int32>
+            <Valid>false</Valid>
+        </SerialNumberID>
+        <BatchNumberID>
+            <Int32>0</Int32>
+            <Valid>false</Valid>
+        </BatchNumberID>
+        <StockLocationID>
+            <Int32>0</Int32>
+            <Valid>false</Valid>
+        </StockLocationID>
+        <Count>
+            <Int32>3</Int32>
+            <Valid>true</Valid>
+        </Count>
+        <Volume>
+            <Float64>0</Float64>
+            <Valid>false</Valid>
+        </Volume>
+        <Note></Note>
+    </Data>
+          </ApiStockStates>
+
+</samp></pre></figure>
+          </p>
+
       
       <h3 id="xStock-webservice"><a href="#toc-xStock-webservice">xStock Webservice</a> <a class="hdr" href="#xStock-webservice">§</a></h3>
 
-          <p><strong>Description</strong></p>
+          <p style="font-size: 18px"><strong>Description</strong></p>
+          <p>Go web service UI for stock system</p>
 
-          <p><strong>Installation Information</strong></p>
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
 
+          <p> Install under docker runtime using this dockerfile image with this command: </p>
+          <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker-compose up -d
 
-          <p><strong>Implementation Information</strong></p>
+</samp></pre></figure>
+          <hr>
 
+          <p style="font-size: 18px"><strong>Implementation Information</strong></p>
 
+          <p>Check the software running with this command: <hr>
+          <figcaption class="shell-cap">Shell</figcaption><pre><samp>$docker stats
+
+</samp></pre></figure>
+          <hr>
+          System_service has to be running. No need to make a specific setup.</p>
 
 
       <h3 id="xStock-terminal-webservice"><a href="#toc-xStock-terminal-webservice">xStock Terminal webservice</a> <a class="hdr" href="#xStock-terminal-webservice">§</a></h3>
 
-          <p><strong>Description</strong></p>
+          <p style="font-size: 18px"><strong>Description</strong></p>
 
-          <p><strong>Installation Information</strong></p>
+         <p> Go web service for warehouses for use on touch terminals</p>
+
+          <p style="font-size: 18px"><strong>Installation Information</strong></p>
+
+          <ul>
+              <li>1. Sign in into android obchodu</li>
+              <li>2. Install Shortcut Maker and Fully Kiosk Browser</li>
+              <li>3. Run Fully Kiosk Browser and edit Start URL to xStock Server URL</li>
+              <li>4. Run Shortcut Maker</li>
+              <li>5. Create a new shortcut from Kiosk Browser, rename to xStock and add icon from icon folder</li>
+          </ul>
 
 
-          <p><strong>Implementation Information</strong></p>
+
 
 
       </main></div>

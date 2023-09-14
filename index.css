@@ -278,7 +278,7 @@ th .line:before {
         color: #68f;
     }
     h1 a, h2 a, h3 a, h4 a, h5 a {
-        color: #aaa;
+        color: #eec2c2;
     }
     figcaption.zig-cap {
         background-color: #b27306;
@@ -343,4 +343,14 @@ th .line:before {
     opacity: 0.3;
     border-radius: 5px;
     background: #a8b9cc;
+}
+
+img{
+    transition: transform 0.25s ease;
+}
+
+
+img:hover {
+    -webkit-transform:scale(2);
+    transform:scale(2);
 }
